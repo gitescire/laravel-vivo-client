@@ -1,0 +1,27 @@
+{
+    "name": "gitescire/laravel-vivo-client",
+    "description": "A Laravel package to connect with the VIVO API for seamless integration",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Panama",
+            "email": "david@escire.lat"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Gitescire\\LaravelVivoClient\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gitescire\\LaravelVivoClient\\LaravelVivoClientServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}
