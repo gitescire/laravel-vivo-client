@@ -21,6 +21,8 @@ LVC_EMAIL_USER_VIVO
 LVC_PASSWORD_USER_VIVO
 # Default VIVO graph
 LVC_GRAPH_VIVO
+# Individual URL base
+LVC_INDIVIDUAL_URL_VIVO
 ~~~
 This variables makes plugin can connect to VIVO backend and make requests to its API.
 
