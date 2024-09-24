@@ -1,6 +1,6 @@
 <?php
 
-namespace Gitescire\LaravelVivoClient;
+namespace Gitescire\LaravelVivoClient\Vivo\Infrastructure\Requests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -13,14 +13,15 @@ class LaravelVivoClient
     /**
      * Perform a sparqlUpdate to create, update or delete an operation with the Vivo API.
      *
-     * @param string $urlVivo The URL of the Vivo API.
-     * @param string $emailUserVivo The email of the Vivo user.
-     * @param string $passwordUserVivo The password of the Vivo user.
      * @param string $query The SPARQL query to execute.
      * @return \Illuminate\Http\JsonResponse The response of the create operation.
      */
-    public static function sparqlUpdate(string $urlVivo, string $emailUserVivo, string $passwordUserVivo, string $query): JsonResponse
+    public static function sparqlUpdate(string $query): JsonResponse
     {
+        $config = config('laravel-vivo-client');
+        $urlVivo = $config['url_vivo'];
+        $emailUserVivo = $config['email_user_vivo'];
+        $passwordUserVivo = $config['password_user_vivo'];
         $client = new Client();
 
         try {
@@ -44,14 +45,15 @@ class LaravelVivoClient
     /**
      * Perform a sparqlQuery to read data with the Vivo API.
      *
-     * @param string $urlVivo The URL of the Vivo API.
-     * @param string $emailUserVivo The email of the Vivo user.
-     * @param string $passwordUserVivo The password of the Vivo user.
      * @param string $query The SPARQL query to execute.
      * @return \Illuminate\Http\JsonResponse The response of the query operation.
      */
-    public static function sparqlQuery(string $urlVivo, string $emailUserVivo, string $passwordUserVivo, string $query): JsonResponse
+    public static function sparqlQuery(string $query): JsonResponse
     {
+        $config = config('laravel-vivo-client');
+        $urlVivo = $config['url_vivo'];
+        $emailUserVivo = $config['email_user_vivo'];
+        $passwordUserVivo = $config['password_user_vivo'];
         $client = new Client();
 
         try {
@@ -83,17 +85,18 @@ class LaravelVivoClient
     /**
      * Perform a create operation on the Vivo API.
      *
-     * @param string $urlVivo The URL of the Vivo API.
-     * @param string $emailUserVivo The email of the Vivo user.
-     * @param string $passwordUserVivo The password of the Vivo user.
-     * @param string $graphVivo The graph of the Vivo API.
      * @param string $individualUri The URI of the individual to create.
      * @param string $label The label of the individual to create.
      *
      * @return \Illuminate\Http\JsonResponse The response of the create operation.
      */
-    public static function testCreate(string $urlVivo, string $emailUserVivo, string $passwordUserVivo, string $graphVivo, string $individualUri, string $label): JsonResponse
+    public static function testCreate(string $individualUri, string $label): JsonResponse
     {
+        $config = config('laravel-vivo-client');
+        $urlVivo = $config['url_vivo'];
+        $emailUserVivo = $config['email_user_vivo'];
+        $passwordUserVivo = $config['password_user_vivo'];
+        $graphVivo = $config['graph_vivo'];
         $client = new Client();
 
         try {
@@ -118,15 +121,15 @@ class LaravelVivoClient
     /**
      * Perform a read operation on the Vivo API.
      *
-     * @param string $urlVivo The URL of the Vivo API.
-     * @param string $emailUserVivo The email of the Vivo user.
-     * @param string $passwordUserVivo The password of the Vivo user.
-     * @param string $graphVivo The graph of the Vivo API.
-     *
      * @return \Illuminate\Http\JsonResponse The response of the read operation.
      */
-    public static function testRead(string $urlVivo, string $emailUserVivo, string $passwordUserVivo, string $graphVivo): JsonResponse
+    public static function testRead(): JsonResponse
     {
+        $config = config('laravel-vivo-client');
+        $urlVivo = $config['url_vivo'];
+        $emailUserVivo = $config['email_user_vivo'];
+        $passwordUserVivo = $config['password_user_vivo'];
+        $graphVivo = $config['graph_vivo'];
         $client = new Client();
 
         try {
@@ -157,17 +160,18 @@ class LaravelVivoClient
     /**
      * Perform an update operation on the Vivo API.
      *
-     * @param string $urlVivo The URL of the Vivo API.
-     * @param string $emailUserVivo The email of the Vivo user.
-     * @param string $passwordUserVivo The password of the Vivo user.
-     * @param string $graphVivo The graph of the Vivo API.
      * @param string $individualUri The URI of the individual to update.
      * @param string $newLabel The new label of the individual to update.
      *
      * @return \Illuminate\Http\JsonResponse The response of the update operation.
      */
-    public static function testUpdate(string $urlVivo, string $emailUserVivo, string $passwordUserVivo, string $graphVivo, string $individualUri, string $newLabel): JsonResponse
+    public static function testUpdate(string $individualUri, string $newLabel): JsonResponse
     {
+        $config = config('laravel-vivo-client');
+        $urlVivo = $config['url_vivo'];
+        $emailUserVivo = $config['email_user_vivo'];
+        $passwordUserVivo = $config['password_user_vivo'];
+        $graphVivo = $config['graph_vivo'];
         $client = new Client();
 
         try {
@@ -209,15 +213,16 @@ class LaravelVivoClient
     /**
      * Test the delete operation on the Vivo API.
      *
-     * @param  string  $urlVivo         The URL of the Vivo API.
-     * @param  string  $emailUserVivo   The email of the user that will be used to authenticate the request.
-     * @param  string  $passwordUserVivo The password of the user that will be used to authenticate the request.
-     * @param  string  $graphVivo       The graph where the individual will be searched.
      * @param  string  $individualUri   The URI of the individual that will be searched.
      * @return \Illuminate\Http\JsonResponse  The response of the delete operation.
      */
-    public static function testDelete(string $urlVivo, string $emailUserVivo, string $passwordUserVivo, string $graphVivo, string $individualUri): JsonResponse
+    public static function testDelete(string $individualUri): JsonResponse
     {
+        $config = config('laravel-vivo-client');
+        $urlVivo = $config['url_vivo'];
+        $emailUserVivo = $config['email_user_vivo'];
+        $passwordUserVivo = $config['password_user_vivo'];
+        $graphVivo = $config['graph_vivo'];
         $client = new Client();
 
         try {

@@ -2,6 +2,7 @@
 
 namespace Gitescire\LaravelVivoClient;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -19,13 +20,18 @@ class LaravelVivoClientServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/laravelVivoClient.php' => config_path('laravelVivoClient.php'),
+            __DIR__ . '/../config/laravel-vivo-client.php' => config_path('laravel-vivo-client.php'),
         ], 'config');
 
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/laravelVivoClient.php',
-            'laravelVivoClient'
+            __DIR__ . '/../config/laravel-vivo-client.php',
+            'laravel-vivo-client'
         );
+
+        $this->loadRoutesFrom(__DIR__ . "/../routes/web.php");
+        $this->loadViewsFrom(__DIR__ . '/../views', 'laravel-vivo-client');
+
+        Blade::componentNamespace("Gitescire\\LaravelVivoClient\\Components", 'laravel-vivo-client');
     }
 
     /**
