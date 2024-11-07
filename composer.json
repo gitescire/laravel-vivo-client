@@ -20,8 +20,5 @@
                 "Gitescire\\LaravelVivoClient\\LaravelVivoClientServiceProvider"
             ]
         }
-    },
-    "require": {
-        "guzzlehttp/guzzle": "7.4"
     }
 }

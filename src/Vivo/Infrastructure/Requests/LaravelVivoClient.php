@@ -12,16 +12,25 @@ class LaravelVivoClient
 
     /**
      * Perform a sparqlUpdate to create, update or delete an operation with the Vivo API.
+     * This method takes a SPARQL query as an input and returns a JSON response.
+     * It uses the settings from the config file or the custom settings provided.
      *
      * @param string $query The SPARQL query to execute.
+     * @param array $settings The custom settings to use. If empty, the settings from the config file are used.
      * @return \Illuminate\Http\JsonResponse The response of the create operation.
      */
-    public static function sparqlUpdate(string $query): JsonResponse
+    public static function sparqlUpdate(string $query, array $settings): JsonResponse
     {
-        $config = config('laravel-vivo-client');
-        $urlVivo = $config['url_vivo'];
-        $emailUserVivo = $config['email_user_vivo'];
-        $passwordUserVivo = $config['password_user_vivo'];
+        if (sizeof($settings)) {
+            $urlVivo = $settings['url_vivo'];
+            $emailUserVivo = $settings['email_user_vivo'];
+            $passwordUserVivo = $settings['password_user_vivo'];
+        } else {
+            $config = config('laravel-vivo-client');
+            $urlVivo = $config['url_vivo'];
+            $emailUserVivo = $config['email_user_vivo'];
+            $passwordUserVivo = $config['password_user_vivo'];
+        }
         $client = new Client();
 
         try {
@@ -45,15 +54,29 @@ class LaravelVivoClient
     /**
      * Perform a sparqlQuery to read data with the Vivo API.
      *
+     * The Vivo API is used to read data from the Vivo database.
+     * The query is passed as a parameter to this function.
+     * The settings array contains the following elements:
+     * - url_vivo: the URL of the Vivo API.
+     * - email_user_vivo: the email of the user to use to make the query.
+     * - password_user_vivo: the password of the user to use to make the query.
+     *
      * @param string $query The SPARQL query to execute.
+     * @param array $settings The settings to be used to make the query.
      * @return \Illuminate\Http\JsonResponse The response of the query operation.
      */
-    public static function sparqlQuery(string $query): JsonResponse
+    public static function sparqlQuery(string $query, array $settings): JsonResponse
     {
-        $config = config('laravel-vivo-client');
-        $urlVivo = $config['url_vivo'];
-        $emailUserVivo = $config['email_user_vivo'];
-        $passwordUserVivo = $config['password_user_vivo'];
+        if (sizeof($settings)) {
+            $urlVivo = $settings['url_vivo'];
+            $emailUserVivo = $settings['email_user_vivo'];
+            $passwordUserVivo = $settings['password_user_vivo'];
+        } else {
+            $config = config('laravel-vivo-client');
+            $urlVivo = $config['url_vivo'];
+            $emailUserVivo = $config['email_user_vivo'];
+            $passwordUserVivo = $config['password_user_vivo'];
+        }
         $client = new Client();
 
         try {

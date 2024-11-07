@@ -27,11 +27,12 @@ class LaravelVivoClientController
      */
     public function handler(array $request): JsonResponse
     {
+        $settings = isset($request['settings']) ? $request['settings'] : []; //from custom settings. If not set, use env settings
         $query = $request['query_vivo'];
         if ($request['read_only_vivo']) {
-            return LaravelVivoClient::sparqlQuery($query);
+            return LaravelVivoClient::sparqlQuery($query, $settings);
         } else {
-            return LaravelVivoClient::sparqlUpdate($query);
+            return LaravelVivoClient::sparqlUpdate($query, $settings);
         }
     }
 
@@ -61,11 +62,12 @@ class LaravelVivoClientController
             return response()->json(['error' => 'The application is not in test mode.'], 403);
         }
 
+        $settings = isset($request['settings']) ? $request['settings'] : []; //from custom settings. If not set, use env settings
         $query = $request['query_vivo'];
         if ($request['read_only_vivo']) {
-            return LaravelVivoClient::sparqlQuery($query);
+            return LaravelVivoClient::sparqlQuery($query, $settings);
         } else {
-            return LaravelVivoClient::sparqlUpdate($query);
+            return LaravelVivoClient::sparqlUpdate($query, $settings);
         }
     }
 
